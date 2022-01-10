@@ -1,0 +1,11 @@
+- name: download rust installer
+  get_url:
+    url: "https://sh.rustup.rs"
+    dest: /usr/local/sbin/rustup-install.sh
+    mode: 0755
+    owner: root
+    group: root
+
+- name: install rust
+  command: "/usr/local/sbin/rustup-install.sh -y"
+  register: install_output

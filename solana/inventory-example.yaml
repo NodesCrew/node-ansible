@@ -1,0 +1,15 @@
+testnet:
+  vars:
+      ansible_ssh_private_key_file: "{{ lookup('env','HOME') }}/.ssh/id_rsa"
+      ansible_become: yes
+
+  hosts:
+      local-testnet:
+          ansible_user: ubuntu
+          ansible_ssh_host: 192.168.0.22
+
+      remote-testnet:
+          ansible_user: ubuntu
+          ansible_ssh_host: 8.8.8.8
+
+

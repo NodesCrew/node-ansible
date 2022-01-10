@@ -1,0 +1,13 @@
+- name: create Solana directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ solana_root }}"
+    - "{{ solana_root }}/log"
+    - "{{ solana_root }}/conf"
+    - "{{ solana_root }}/keys"
+    - "{{ solana_root }}/ledger"
+    - "{{ solana_root }}/accounts"
+    - "{{ solana_root }}/snapshots"

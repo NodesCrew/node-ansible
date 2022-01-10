@@ -1,0 +1,35 @@
+[Unit]
+Description=Solana {{ solana_cluster }} node
+After=network.target syslog.target solana-sys-tuner.service
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+LimitNOFILE=2048000
+Environment="SOLANA_METRICS_CONFIG={{ solana_metrics_config }}"
+ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
+--identity {{ solana_root }}/keys/validator-keypair.json \
+--vote-account {{ solana_root }}/keys/vote-account-keypair.json \
+{% for entry_point in solana_entrypoints %}
+--entrypoint {{ entry_point }} \
+{% endfor %}
+--expected-genesis-hash {{ solana_genesis_hash }} \
+--wal-recovery-mode skip_any_corrupted_record \
+--limit-ledger-size 50000000 \
+--ledger {{ solana_root }}/ledger \
+--snapshots {{ solana_root }}/snapshots \
+--log {{ solana_root }}/log/solana.log \
+--rpc-port 8899 \
+--no-port-check \
+--rpc-bind-address 127.0.0.1 \
+--private-rpc \
+--dynamic-port-range 8000-8020 \
+--snapshot-interval-slots {{ solana_snapshot_interval_slots }} \
+--maximum-local-snapshot-age 1000 \
+--snapshot-compression none
+
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+[Install]
+WantedBy=multi-user.target

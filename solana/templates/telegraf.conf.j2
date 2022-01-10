@@ -1,0 +1,36 @@
+[agent]
+  hostname = "{{ inventory_hostname }}"
+  flush_interval = "15s"
+  interval = "15s"
+
+[[inputs.cpu]]
+    percpu = true
+    totalcpu = true
+    collect_cpu_time = false
+    report_active = false
+
+[[inputs.disk]]
+    ignore_fs = ["devtmpfs", "devfs"]
+
+[[inputs.io]]
+[[inputs.mem]]
+[[inputs.net]]
+[[inputs.system]]
+[[inputs.swap]]
+[[inputs.netstat]]
+[[inputs.processes]]
+[[inputs.kernel]]
+[[inputs.diskio]]
+
+[[outputs.influxdb]]
+  database = "metricsdb"
+  urls = [ "http://metrics.stakeconomy.com:8086" ]
+  username = "metrics"
+  password = "password"
+
+[[inputs.exec]]
+  commands = ["sudo su -c {{ solana_root }}/solanamonitoring/monitor.sh -s /bin/bash root"]
+  interval = "5m"
+  timeout = "1m"
+  data_format = "influx"
+  data_type = "integer"

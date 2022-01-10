@@ -1,0 +1,12 @@
+---
+- name: install
+  hosts: testnet
+
+  tasks:
+      - import_tasks: tasks/make_dirs.yaml
+      - import_tasks: tasks/install_packages.yaml
+      - import_tasks: tasks/install_rust.yaml
+      - import_tasks: tasks/install_monitoring.yaml
+      - import_tasks: tasks/setup_logrotate.yaml
+      - import_tasks: tasks/setup_solana.yaml
+      - import_tasks: tasks/setup_monitoring.yaml

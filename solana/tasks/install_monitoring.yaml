@@ -1,0 +1,33 @@
+- name: Create dir for telegraf
+  ansible.builtin.file:
+    path: /etc/telegraf
+    state: directory
+    mode: '0755'
+
+- name: Add an apt key for influx repo
+  ansible.builtin.apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+    state: present
+
+- name: Add influx repository into sources list
+  ansible.builtin.apt_repository:
+    repo: deb https://repos.influxdata.com/ubuntu bionic stable
+    state: present
+    filename: influxdata
+
+- name: update packages
+  apt:
+    update_cache: yes
+
+- name: install dependencies
+  apt:
+    pkg: ['telegraf', 'jq', 'bc']
+    state: latest
+
+- name: adding existing user telegraf to sudo & adm groups
+  user:
+    name: telegraf
+    groups: sudo, adm
+    append: yes
+
+

@@ -1,0 +1,21 @@
+- name: make solana unit file
+  template:
+    src: ./templates/solana.service.j2
+    dest: "{{ solana_root }}/conf/solana.service"
+
+- name: make symlink for solana unit-file
+  file:
+    src: "{{ solana_root }}/conf/solana.service"
+    dest: /etc/systemd/system/solana.service
+    state: link
+
+- name: make solana-sys-tuner unit file
+  template:
+    src: ./templates/solana-sys-tuner.service.j2
+    dest: "{{ solana_root }}/conf/solana-sys-tuner.service"
+
+- name: make symlink for solana-sys-tuner unit-file
+  file:
+    src: "{{ solana_root }}/conf/solana-sys-tuner.service"
+    dest: /etc/systemd/system/solana-sys-tuner.service
+    state: link

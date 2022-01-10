@@ -1,0 +1,19 @@
+solana_cluster: testnet
+
+solana_metrics_config: host=https://metrics.solana.com:8086,db=tds,u=testnet_write,p=c4fa841aa918bf8274e3e2a44d77568d9861b3ea
+solana_genesis_hash: 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY
+
+solana_entrypoints:
+  - entrypoint.testnet.solana.com:8001
+  - entrypoint2.testnet.solana.com:8001
+  - entrypoint3.testnet.solana.com:8001
+
+solana_known_validators:
+  - GcibmF4zgb6Vr4bpZZYHGDPZNWiLnBDUHdpJZTsTDvwe
+  - eoKpUABi59aT4rR9HGS3LcMecfut9x7zJyodWWP43YQ
+  - 3iPu9xQ3mCFmqME9ZajuZbFHjwagAxhgfTxnc4pWbEBC
+  - 8SRKNfvMerfA1BdU79CAwU4wNfjnDvFrBo3o5f5TS4uv
+  - FCnsZL8d45gC5aVsmheV3zs533DfM2jRk1vNnDgLNkfr
+  - 8VNj7K6ssFcUogRfT6miUzz8HTKu1nX2n8MYr5z49CXb
+
+solana_snapshot_interval_slots: 0

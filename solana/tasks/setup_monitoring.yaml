@@ -1,0 +1,10 @@
+- name: make solanamonitoring telegraf.conf
+  template:
+    src: ./templates/telegraf.conf.j2
+    dest: "{{ solana_root }}/conf/telegraf.conf"
+
+- name: make symlink for telegraf.conf
+  file:
+    src: "{{ solana_root }}/conf/telegraf.conf"
+    dest: /etc/telegraf/telegraf.conf
+    state: link

@@ -1,0 +1,15 @@
+- name: make logrotate config
+  template:
+    src: ./templates/solana.logrotate.j2
+    dest: "{{ solana_root }}/conf/solana.logrotate"
+
+- name: make symlink for logrotate
+  file:
+    src: "{{ solana_root }}/conf/solana.logrotate"
+    dest: /etc/logrotate.d/solana.logrotate
+    state: link
+
+- name: restart rsyslog
+  service:
+    name: logrotate
+    state: restarted
